@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
-"""
-Authentication through class
-"""
+'''
+manage the API authentification
+'''
 from flask import request
-from typing import List
-from typing import TypeVar
+from typing import TypeVar, List
 
 
-class Auth:
-    """auth class"""
-
+class Auth():
+    '''
+    manage the API authentification
+    '''
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """returns false
-        """
+        ''' require_authentification '''
         if path is None:
             return True
         if excluded_paths is None:
@@ -27,11 +26,13 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        """returns None
-        """
-        return None
+        ''' def authorization_header '''
+        if request is None:
+            return None
+        if 'Authorization' not in request.headers:
+            return None
+        return request.headers['Authorization']
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """ returns None
-        """
+        ''' def current_user '''
         return None
