@@ -30,4 +30,3 @@ def stats() -> str:
 def unauth():
     """GET /api/v1/unauthorized """
     return abort(401)
-
