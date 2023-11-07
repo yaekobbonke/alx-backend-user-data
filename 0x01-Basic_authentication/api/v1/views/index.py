@@ -24,3 +24,10 @@ def stats() -> str:
     stats = {}
     stats['users'] = User.count()
     return jsonify(stats)
+
+
+@app_views.route('/unauthorized')
+def unauth():
+    """GET /api/v1/unauthorized """
+    return abort(401)
+
