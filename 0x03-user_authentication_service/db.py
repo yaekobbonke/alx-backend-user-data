@@ -44,7 +44,7 @@ class DB:
         return user
 
     def find_user_by(self, **kargs) -> User:
-        """ Find user by specified criteria 
+        """ Find user by specified criteria
         """
         try:
             user = self._session.query(User).filter_by(**kargs).first()
