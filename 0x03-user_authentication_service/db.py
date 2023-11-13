@@ -35,7 +35,7 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email, hashed_password) -> User:
+    def add_user(self, email, hashed_password) -> TypeVar('User'):
         """ returns a User object
         """
         user = User(email=email, hashed_password=hashed_password)
@@ -44,7 +44,8 @@ class DB:
         return user
 
     def find_user_by(self, **kargs) -> TypeVar('User'):
-        ''' def find user '''
+        """ Find user by specified criteria 
+        """
         try:
             user = self._session.query(User).filter_by(**kargs).first()
         except TypeError:
