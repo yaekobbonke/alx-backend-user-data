@@ -43,7 +43,7 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, **kargs) -> User:
+    def find_user_by(self, **kargs: Dict[str, Any]) -> User:
         """ Find user by specified criteria
         """
         try:
