@@ -53,7 +53,7 @@ class DB:
         if user is None:
             raise NoResultFound
         return user
-   
+
     def update_user(self, user_id: int, **kwargs) -> None:
         """update user
         """
