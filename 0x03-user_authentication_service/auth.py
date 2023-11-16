@@ -38,7 +38,7 @@ class Auth:
                 return user
             else:
                 raise ValueError("User {} already exists".format(email))
-    
+
     def valid_login(self, email: str, password: str) -> bool:
         """ validate login
         """
@@ -55,8 +55,7 @@ class Auth:
         my_id = str(uuid.uuid4())
         return my_id
 
-
-     def create_session(self, email: str) -> str:
+    def create_session(self, email: str) -> str:
         """Get session ID
         """
 
@@ -68,7 +67,6 @@ class Auth:
         self._db.update_user(user.id, session_id=session_id)
         return session_id
 
-    
     def get_user_from_session_id(self, session_id: str) -> Optional[User]:
         """Find user by session ID
         """
@@ -79,13 +77,11 @@ class Auth:
         except NoResultFound:
             return
 
-
     def destroy_session(self, user_id: int) -> None:
         """Destroy session
         """
         if user_id:
             self._db.update_user(user_id, session_id=None)
-
 
     def get_reset_password_token(self, email: str) -> str:
         """Generate reset password token
@@ -95,12 +91,11 @@ class Auth:
             if user:
                 token = _generate_uuid()
                 self._db.add_user(token)
-                return  jsonify({'email': email, 'token':, token})
+                return jsonify({'email': email, 'token': token})
             else:
                 abort(401)
         except Exception:
             raise ValueError
-
 
     def update_password(self, reset_token: str, password: str) -> None:
         """Update password
@@ -108,10 +103,10 @@ class Auth:
         try:
             user = self._db.find_user_by(reset_token)
             if user:
-                new_password = bcryp.hashpw(password.encode('utf-8'), gensalt())
+                new_password = bcryp.hashpw(password.encode('utf-8'),
+                                            gensalt())
                 update_user(new_password, reset_token=None)
             else:
                 abort(403)
         except ValueError:
             abort(403)
-
