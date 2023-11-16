@@ -11,7 +11,6 @@ from sqlalchemy.exc import InvalidRequestError
 
 from user import Base
 from user import User
-from typing import TypeVar
 
 
 class DB:
